@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 
 class SessionHelper:
@@ -8,12 +9,16 @@ class SessionHelper:
 
     def login(self, username, password):
         wd = self.app.wd
+        # Open URL, insert credentials and submit login
         self.app.open_home_page()
-        wd.find_element(by=By.NAME, value="username").clear()
-        wd.find_element(by=By.NAME, value="username").send_keys(username)
-        wd.find_element(by=By.NAME, value="password").clear()
-        wd.find_element(by=By.NAME, value="password").send_keys(password)
-        wd.find_element(by=By.XPATH, value="//input[@type='submit']").click()
+        wd.find_element_by_name("username").click()
+        wd.find_element_by_name("username").clear()
+        wd.find_element_by_name("username").send_keys(username)
+        wd.find_element_by_name("password").click()
+        wd.find_element_by_name("password").clear()
+        wd.find_element_by_name("password").send_keys(password)
+        wd.capabilities['nativeEvents'] = False
+        wd.find_element_by_xpath("//input[@value='Login']").send_keys(Keys.ENTER)
 
     def logout(self):
         wd = self.app.wd
