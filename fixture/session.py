@@ -36,7 +36,7 @@ class SessionHelper:
     def is_logged_in_as(self, username):
         return self.get_logged_user() == username
 
-    def get_logged_username(self):
+    def get_logged_user(self):
         wd = self.app.wd
         return wd.find_element(by=By.CSS_SELECTOR, value="td.login-info-left span").text
 
