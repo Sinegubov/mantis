@@ -1,9 +1,9 @@
 from model.project_form import ProjectForm
 
 
-def test_add_project(app, json_data_projects):
+def test_add_project(app, json_projects):
     old_projects_list = app.project.get_projects_list()
-    project = json_data_projects
+    project = json_projects
     project.project_name = project.project_name.strip()
     if project not in old_projects_list:
         app.project.add_new_project(project)
