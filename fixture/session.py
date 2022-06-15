@@ -29,7 +29,7 @@ class SessionHelper:
         return len(wd.find_elements(by=By.LINK_TEXT, value="Logout")) > 0
 
     def is_logged_in_as(self, username):
-        return self.get_logged_user() == username
+        return self.get_logged_username() == username
 
     def get_logged_username(self):
         wd = self.app.wd
