@@ -1,8 +1,5 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
-from fixture.group import GroupHelper
-from fixture.contact import ContactHelper
-from fixture.contact_merge_function import ContactInfoHelper
 
 
 class Application:
@@ -18,9 +15,6 @@ class Application:
             raise ValueError("Unrecognized browser %s" % browser)
         self.wd.implicitly_wait(2)
         self.session = SessionHelper(self)
-        self.group = GroupHelper(self)
-        self.contact = ContactHelper(self)
-        self.contact_merge_function = ContactInfoHelper(self)
         self.base_url = base_url
 
     def is_valid(self):
