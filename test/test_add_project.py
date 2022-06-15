@@ -1,4 +1,3 @@
-from model.project_form import ProjectForm
 
 
 def test_add_project(app, json_projects):
@@ -10,5 +9,5 @@ def test_add_project(app, json_projects):
         new_projects_list = app.project.get_projects_list()
         assert len(old_projects_list)+1 == len(new_projects_list)
         old_projects_list.append(project)
-        assert sorted(old_projects_list, key=ProjectForm.id_or_max) == \
-               sorted(new_projects_list, key=ProjectForm.id_or_max)
+        assert sorted(old_projects_list, key=(lambda x: x.project_name)) == \
+               sorted(new_projects_list, key=(lambda x: x.project_name))

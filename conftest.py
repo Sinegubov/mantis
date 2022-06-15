@@ -4,6 +4,7 @@ import pytest
 import os.path
 import json
 import importlib
+import jsonpickle
 
 fixture = None
 target = None
@@ -33,7 +34,7 @@ def app(request):
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
-        fixture.session.ensure_logout()
+        #fixture.session.ensure_logout()
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture

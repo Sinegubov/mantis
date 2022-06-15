@@ -12,9 +12,3 @@ class ProjectForm:
 
     def __eq__(self, other):
         return self.project_name == other.project_name
-
-    def id_or_max(self):
-        if self.project_name:
-            return int(self.project_name)
-        else:
-            return maxsize
