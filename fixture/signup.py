@@ -1,4 +1,5 @@
 import re
+import time
 
 
 class SignupHelper:
@@ -14,6 +15,7 @@ class SignupHelper:
         wd.find_element_by_css_selector('input[type="submit"]').click()
 
         mail = self.app.mail.get_mail(username, password, "[MantisBT] Account registration")
+        time.sleep(3)
         url = self.extract_confirmation_url(mail)
 
         wd.get(url)

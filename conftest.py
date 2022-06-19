@@ -31,11 +31,12 @@ def config(request):
 def app(request, config):
     global fixture
     browser = request.config.getoption("--browser")
+    web_config = load_config(request.config.getoption("--target"))
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, config=config)
     fixture.session.ensure_login(username=config["webadmin"]["username"], password=config["webadmin"]["password"])
     return fixture
-
+###
 
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
@@ -87,7 +88,7 @@ def restore_server_configuration(host, username, password):
                 remote.remove("config_inc.php")
             remote.rename("config_inc.php.bak", "config_inc.php")
 
-
+###
 def load_from_module(module):
     return importlib.import_module("data.%s" % module).testdata
 
