@@ -36,7 +36,7 @@ def app(request, config):
         fixture = Application(browser=browser, config=config)
     fixture.session.ensure_login(username=config["webadmin"]["username"], password=config["webadmin"]["password"])
     return fixture
-###
+
 
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
@@ -63,13 +63,13 @@ def pytest_generate_tests(metafunc):
             metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
 
 
-#@pytest.fixture(scope="session", autouse=True)
-#def configure_server(request, config):
-#    install_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
-#
-#    def fin():
-#        restore_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
-#    request.addfinalizer(fin)
+@pytest.fixture(scope="session", autouse=True)
+def configure_server(request, config):
+    install_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
+
+    def fin():
+        restore_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
+    request.addfinalizer(fin)
 
 
 def install_server_configuration(host, username, password):
@@ -88,7 +88,7 @@ def restore_server_configuration(host, username, password):
                 remote.remove("config_inc.php")
             remote.rename("config_inc.php.bak", "config_inc.php")
 
-###
+
 def load_from_module(module):
     return importlib.import_module("data.%s" % module).testdata
 
