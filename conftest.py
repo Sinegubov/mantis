@@ -63,13 +63,13 @@ def pytest_generate_tests(metafunc):
             metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
 
 
-@pytest.fixture(scope="session", autouse=True)
-def configure_server(request, config):
-    install_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
-
-    def fin():
-        restore_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
-    request.addfinalizer(fin)
+#@pytest.fixture(scope="session", autouse=True)
+#def configure_server(request, config):
+#    install_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
+#
+#    def fin():
+#        restore_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
+#    request.addfinalizer(fin)
 
 
 def install_server_configuration(host, username, password):
