@@ -32,7 +32,7 @@ class SoapHelper:
                 projects_list.append(ProjectForm(
                     id=project.id,
                     project_name=project.name,
-                    project_description=project.descriprion))
+                    project_description=project.description))
             return projects_list
         except WebFault:
             return False
